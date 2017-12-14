@@ -245,47 +245,49 @@ $(document).ready(function() {
     if ($('a.category-link').length > 0) {
         $('a.category-link').matchHeight();
     }
-
-    $("#addDealForm").on('submit',(function(e) {
-        e.preventDefault();
-
-        var form = $(this).attr('id');
-        var formId = form;
-        var btn = $('#'+formId).find('button.submit');
-        btn.button('loading');
-
-        $.ajax({
-            type: "POST",
-            processData: false,
-            contentType: false,
-            cache: false,
-            url: my_url + "ajax/deals/add/",
-            data: new FormData(this),
-            success: function(msg) {
-                var obj = $.parseJSON(msg);
-
-                removeError(formId);
-
-                if (obj.status == 'success') {
-                    $('#add-deal-content').hide();
-                    $('#success-deal').show();
-                    goTo('#success-deal');
-                } else {
-                    if (is_array(obj.text)) {
-                        showError(obj.text, form);
-                    } else {
-                        if (obj.login == 1) {
-                            openLogin();
-                        } else {
-                            createMsg('error', obj.text, '');
-                        }
-                    }
-                }
-
-                btn.button('reset');
-            }
-        });
-    }));
+/**
+*add deal form old logic
+* */
+    // $("#addDealForm").on('submit',(function(e) {
+    //     e.preventDefault();
+    //
+    //     var form = $(this).attr('id');
+    //     var formId = form;
+    //     var btn = $('#'+formId).find('button.submit');
+    //     btn.button('loading');
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         processData: false,
+    //         contentType: false,
+    //         cache: false,
+    //         url: my_url + "ajax/deals/add/",
+    //         data: new FormData(this),
+    //         success: function(msg) {
+    //             var obj = $.parseJSON(msg);
+    //
+    //             removeError(formId);
+    //
+    //             if (obj.status == 'success') {
+    //                 $('#add-deal-content').hide();
+    //                 $('#success-deal').show();
+    //                 goTo('#success-deal');
+    //             } else {
+    //                 if (is_array(obj.text)) {
+    //                     showError(obj.text, form);
+    //                 } else {
+    //                     if (obj.login == 1) {
+    //                         openLogin();
+    //                     } else {
+    //                         createMsg('error', obj.text, '');
+    //                     }
+    //                 }
+    //             }
+    //
+    //             btn.button('reset');
+    //         }
+    //     });
+    // }));
 });
 
 function initJS()

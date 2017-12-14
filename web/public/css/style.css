@@ -63,6 +63,7 @@ a.category-link span { font-size: 13px; color: #999; font-weight: normal; }
 a.category-link:hover { background: #f8f8f8; color: #ff3300; }
 
 /* Texts */
+.text-center {text-align: center;}
 h1.page-title { text-transform: uppercase; font-weight: 300; text-align: center; margin: 0px; padding: 0px; margin-bottom: 20px; color: #212121; font-size: 38px; }
 h1.merchant-title { font-weight: 400; margin: 0px; padding: 0px; margin-bottom: 10px; color: #212121; font-size: 30px; }
 h2.page-title { font-weight: 400; margin: 0px; padding: 0px; margin-bottom: 20px; color: #212121; font-size: 22px; }

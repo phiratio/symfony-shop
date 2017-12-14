@@ -1,46 +1,55 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-    <form name="product_new" method="post" action="{{ path('product_new') }}" enctype="multipart/form-data">
-        <div>
-            <label for="name" class="required">Name</label>
-            <input type="text" id="name" name="product_new[name]" required="required"/>
-        </div>
-        {% if form.name.vars.errors | length %}
-            <div>{{ form_errors(form.name) }}</div>
-        {% endif %}
-        <div>
-            <label for="description" class="required">Description</label>
-            <textarea id="description" name="product_new[description]" required="required"></textarea>
-        </div>
-        {% if form.description.vars.errors | length %}
-            <div>{{ form_errors(form.description) }}</div>
-        {% endif %}
-        <div>
-            <label for="quantity" class="required">Quantity</label>
-            <input type="text" id="quantity" name="product_new[quantity]" required="required"/>
-        </div>
-        {% if form.quantity.vars.errors | length %}
-            <div>{{ form_errors(form.quantity) }}</div>
-        {% endif %}
-        <div>
-            <label for="price" class="required">Price</label>
-            <input type="text" id="price" name="product_new[price]" required="required"/>
-        </div>
-        {% if form.price.vars.errors | length %}
-            <div>{{ form_errors(form.price) }}</div>
-        {% endif %}
-        <div>
-            <label for="image">Image</label>
-            <input type="file" id="image" name="product_new[imageFromForm]"/>
-        </div>
-        {% if form.imageFromForm.vars.errors | length %}
-            <div>{{ form_errors(form.imageFromForm) }}</div>
-        {% endif %}
+    <form role="form" id="addDealForm" name="product_new" method="post" action="{{ path('product_new') }}" enctype="multipart/form-data" >
+        <div class="container" id="add-deal-content">
+            <div class="row">
+                <div class="col-lg-3 col-md-2"></div>
+                <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                    <div class="form-group text-center">
+                        <label for="productName" class="url">Име на продукта<span class="required-field">*</span></label>
+                        <input type="text" name="product_new[name]" id="productName" value="" class="form-control" required>
+                    </div>
+                    {% if form.name.vars.errors | length %}
+                        <div>{{ form_errors(form.name) }}</div>
+                    {% endif %}
+                    <div class="form-group text-center">
+                        <label for="procutDescription" class="description">Описание <span class="required-field">*</span></label>
+                        <textarea name="product_new[description]" id="procutDescription" class="form-control" rows="5" cols="" placeholder="Опишете продукта" required></textarea>
+                    </div>
+                    {% if form.description.vars.errors | length %}
+                        <div>{{ form_errors(form.description) }}</div>
+                    {% endif %}
+                    <div class="form-group text-center">
+                        <label for="productQuantity" class="quality">Количество<span class="required-field">*</span></label>
+                        <input type="text" name="product_new[quantity]" id="productQuantity" value="" class="form-control onlyDecimal" placeholder="Количество">
+                    </div><div class="form-group text-center">
+                        {% if form.quantity.vars.errors | length %}
+                            <div>{{ form_errors(form.quantity) }}</div>
+                        {% endif %}
+                        <label for="productPrice" class="price">Цена (лв.)<span class="required-field">*</span></label>
+                        <input type="text" name="product_new[price]" id="productPrice" value="" class="form-control onlyDecimal" placeholder="Цена">
+                    </div>
+                    {% if form.price.vars.errors | length %}
+                        <div>{{ form_errors(form.price) }}</div>
+                    {% endif %}
+                    <div class="form-group text-center">
+                        <label for="productImage" class="image">Изображение</label>
+                        <input type="file" name="product_new[imageFromForm]" id="productImage" value="" class="form-control" accept="image/*">
+                    </div>
+                    {% if form.imageFromForm.vars.errors | length %}
+                        <div>{{ form_errors(form.imageFromForm) }}</div>
+                    {% endif %}
 
-        {{ form_row(form._token) }}
-
-        <input type="submit">
+                    {{ form_row(form._token) }}
+                    <div class="mar-t-30 text-center">
+                        <button type="submit" class="btn btn-green submit uppercase" name="dealAdd" value="add">
+                            Добави продукт!
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-2"></div>
+            </div>
+        </div>
     </form>
     {% if not form.vars.valid %}
         <div id="global_form_errors">
