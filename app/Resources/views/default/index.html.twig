@@ -1,55 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    {% for message in app.session.flashBag.get('success') %}
-        <p>{{ message }}</p>
-    {% endfor %}
-    {% for message in app.session.flashBag.get('warning') %}
-        <p>{{ message }}</p>
-    {% endfor %}
-    <table border="1">
-        <thead>
-        <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Quantity</td>
-            <td>Price</td>
-            <td>Date Added</td>
-            <td>Picture</td>
-            <td>Sold By</td>
-            <td>Options</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.quantity }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.dateCreated.format('Y/m/d') }}</td>
-                {% if product.image is null %}
-                    <td><img src="{{ asset('public/imag/no-image.jpg') }}" height="75" width="75"/></td>
-                {% else %}
-                    <td><img src="/public/img/uploaded{{ product.image }}" height="75" width="75"/></td>
-                {% endif %}
-                <td>{{ product.user.username }}</td>
-                <td>
-                    {% if app.user %}
-                        {% if app.user != product.user %}
-                            <a href="{{ path('product_view_one', { 'id': product.id }) }}">Buy</a>
-                            <a href="{{ path('review_add', { 'id': product.id }) }}">Leave a Message</a>
-                        {% endif %}
-                    {% else %}
-                        <a href="{{ path('security_login') }}">Login To View</a>
-                    {% endif %}
-                    {% if app.user is same as(product.user) %}
-                        <a href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
-                        <a href="{{ path('product_delete', { 'id': product.id }) }}">Delete</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock %}
+{#{% block body %}#}
+    {#{% for message in app.session.flashBag.get('success') %}#}
+        {#<p>{{ message }}</p>#}
+    {#{% endfor %}#}
+    {#{% for message in app.session.flashBag.get('warning') %}#}
+        {#<p>{{ message }}</p>#}
+    {#{% endfor %}#}
+    {#<table border="1">#}
+        {#<thead>#}
+        {#<tr>#}
+            {#<td>Name</td>#}
+            {#<td>Description</td>#}
+            {#<td>Quantity</td>#}
+            {#<td>Price</td>#}
+            {#<td>Date Added</td>#}
+            {#<td>Picture</td>#}
+            {#<td>Sold By</td>#}
+            {#<td>Options</td>#}
+        {#</tr>#}
+        {#</thead>#}
+        {#<tbody>#}
+        {#{% for product in products %}#}
+            {#<tr>#}
+                {#<td>{{ product.name }}</td>#}
+                {#<td>{{ product.description }}</td>#}
+                {#<td>{{ product.quantity }}</td>#}
+                {#<td>{{ product.price }}</td>#}
+                {#<td>{{ product.dateCreated.format('Y/m/d') }}</td>#}
+                {#{% if product.image is null %}#}
+                    {#<td><img src="{{ asset('public/imag/no-image.jpg') }}" height="75" width="75"/></td>#}
+                {#{% else %}#}
+                    {#<td><img src="/public/img/uploaded{{ product.image }}" height="75" width="75"/></td>#}
+                {#{% endif %}#}
+                {#<td>{{ product.user.username }}</td>#}
+                {#<td>#}
+                    {#{% if app.user %}#}
+                        {#{% if app.user != product.user %}#}
+                            {#<a href="{{ path('product_view_one', { 'id': product.id }) }}">Buy</a>#}
+                            {#<a href="{{ path('review_add', { 'id': product.id }) }}">Leave a Message</a>#}
+                        {#{% endif %}#}
+                    {#{% else %}#}
+                        {#<a href="{{ path('security_login') }}">Login To View</a>#}
+                    {#{% endif %}#}
+                    {#{% if app.user is same as(product.user) %}#}
+                        {#<a href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>#}
+                        {#<a href="{{ path('product_delete', { 'id': product.id }) }}">Delete</a>#}
+                    {#{% endif %}#}
+                {#</td>#}
+            {#</tr>#}
+        {#{% endfor %}#}
+        {#</tbody>#}
+    {#</table>#}
+{#{% endblock %}#}
