@@ -1,0 +1,173 @@
+<!-- SIGUNUP MODAL-->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog width-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center">Регистрация</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="well form-horizontal" action="{{ path('security_register') }}" method="post" id="signupForm">
+                    <fieldset>
+
+                        <!-- Form Name -->
+                        <legend class="mar-b-0">
+                            <span class="text-center">Моля въведете данните си:</span>
+                        </legend>
+                        <br>
+
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label class="control-label">Име</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="user_register[firstName]" placeholder="Име" class="form-control"
+                                           type="text" required>
+                                    {% if form.firstName.vars.errors | length %}
+                                        <div>{{ form_errors(form.firstName) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label class="control-label">Фамилия</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="user_register[lastName]" placeholder="Фамилия" class="form-control"
+                                           type="text" required>
+                                    {% if form.lastName.vars.errors | length %}
+                                        <div>{{ form_errors(form.lastName) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Country options @todo: make them dynamic -->
+                        <div class="form-group">
+                            <label for="selectCountry" class="control-label">Страна</label>
+                            <div class="selectContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
+                                    <select id="selectCountry" name="user_register[country]"
+                                            class="form-control selectpicker" required>
+                                        <option value="" selected disabled>Избирай</option>
+                                        {% for key, value in form.country.vars.choices %}
+                                            <option value="{{ value.value }}">{{ value.label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="form-group">
+                            <label class="control-label">Потребителско име</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="user_register[username]" placeholder="Потребителско име"
+                                           class="form-control" type="text" required>
+                                    {% if form.username.vars.errors | length %}
+                                        <div>{{ form_errors(form.username) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label class="control-label">Парола</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i
+                                                class="glyphicon glyphicon-hand-right"></i></span>
+                                    <input name="user_register[rawPassword][first]" placeholder="Парола"
+                                           class="form-control" type="password" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Match-->
+                        <div class="form-group">
+                            <label class="control-label">Повтори паролата</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                    <input name="user_register[rawPassword][second]" placeholder="Повтори паролата"
+                                           class="form-control"
+                                           type="password" required>
+                                    {% if form.rawPassword.vars.errors | length %}
+                                        <div>{{ form_errors(form.username) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- E-Mail -->
+                        <div class="form-group">
+                            <label class="control-label">E-Mail</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input name="user_register[email]" placeholder="E-Mail Address" class="form-control"
+                                           type="email" required>
+                                    {% if form.email.vars.errors | length %}
+                                        <div>{{ form_errors(form.email) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping -->
+                        <div class="form-group">
+                            <label class="control-label">Адрес за доставка</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <input name="user_register[shippingAddress]" placeholder="Адрес за доставка"
+                                           class="form-control" type="text" required>
+                                    {% if form.shippingAddress.vars.errors | length %}
+                                        <div>{{ form_errors(form.shippingAddress) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <!-- Terms accept -->
+                        <label class="label_check">
+                            <input name="agree" value="1" type="checkbox"/> приемам <a href="uslovia-za-polzvane.html"
+                                                                                       target="_blank">условията за
+                                ползване</a>
+                        </label>
+                        <div data-id="agree"></div>
+                        <br/>
+                        <button type="submit" class="btn btn-block btn-green submit">Регистрация
+                            <!-- onclick="signUp('signupForm');" -->
+                        </button>
+                        {{ form_row(form._token) }}
+
+                        {% for message in app.session.flashbag.get('warning') %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+
+                        {% if not form.vars.valid %}
+                            <div id="global_form_errors">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    Вече имате акаунт? <a href="javascript: void(0);" data-toggle="modal" data-target="#loginModal"
+                                          data-dismiss="modal">Влезте сега!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

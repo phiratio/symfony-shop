@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td>Date Added</td>
+            <td>Picture</td>
+            <td>Sold By</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.dateCreated.format('Y/m/d') }}</td>
+            {% if product.image is null %}
+                <td><img src="{{ asset('public/images/default.jpg') }}" height="75" width="75"/></td>
+            {% else %}
+                <td><img src="/public/images/{{ product.image }}" height="75" width="75"/></td>
+            {% endif %}
+            <td>{{ product.user.username }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <form name="review_add" method="post">
+        <div>
+            <label for="review_add_message" class="required">Message</label>
+            <textarea id="review_add_message" name="review_add[message]"
+                      required="required">{{ review.message }}</textarea>
+        </div>
+        <div>
+            <label for="review_add_rating" class="required">Rating</label>
+            <select id="review_add_rating" name="review_add[rating]">
+                {% for i in 1..5 %}
+                    {% if i == review.rating %}
+                        <option value="{{ i }}" selected="selected">{{ i }}</option>
+                    {% else %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        {{ form_row(form._token) }}
+        {% if not form.vars.valid %}
+            <div id="global_form_errors">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+        <input type="submit">
+    </form>
+{% endblock %}
+

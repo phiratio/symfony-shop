@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="post" action="{{ path('product_delete_confirmed', {'id':product.id}) }}">
+        {{ product.name }}
+        {{ product.description }}
+        {{ product.quantity }}
+        {{ product.price }}
+        {{ product.dateCreated.format('Y/M/d') }}
+        {% if product.image is null %}
+            <img src="{{ asset('public/images/default.jpg') }}" height="75" width="75"/>
+        {% else %}
+            <img src="/public/images/{{ product.image }}" height="75" width="75"/>
+        {% endif %}
+        <input type="submit" value="Delete">
+    </form>
+{% endblock %}
+

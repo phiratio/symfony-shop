@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block signupmodal %}
+{{ include(':security:register_form.html.twig') }}
+{% endblock %}
+
+{#<div id="username_div">#}
+    {#{{ form_label(form.username, 'Username: ', { 'label_attr': {'class': 'username_class'}, 'id': 'username' }) }}#}
+    {#{{ form_widget(form.username, { 'attr': {}, 'id': 'username' }) }}#}
+{#</div>#}
+{#{% if not form.vars.valid %}#}
+    {#<div>#}
+        {#{{ form_errors(form.username) }}#}
+    {#</div>#}
+{#{% endif %}{% for passwordField in form.password %}#}
+
+    {#<div class="passwords_div">#}
+        {#{{ form_label(passwordField, null) }}#}
+        {#{{ form_widget(passwordField) }}#}
+    {#</div>#}
+{#{% endfor %}#}
+
+    {#{% if not form.vars.valid %}#}
+        {#<div>#}
+            {#{{ form_errors(form.password) }}#}
+        {#</div>#}
+    {#{% endif %}#}
+{#<div id="email_div">#}
+    {#{{ form_widget(form.email) }}#}
+{#</div>#}
+
+
+
+{#{{ form_row(form._token) }}#}
+
+{#<input type="submit">#}
+
+{#<div id="global_form_errors">#}
+    {#{{ form_errors(form) }}#}
+{#</div>#}
+

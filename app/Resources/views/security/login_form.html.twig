@@ -1,0 +1,61 @@
+<!-- LOGIN MODAL-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog width-400px width-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Вход</h4>
+            </div>
+            <div class="modal-body">
+                <!--<div class="row">-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-r-4">-->
+                <!--<a href="index4b21.html?loginWith=facebook&amp;c=aHR0cHM6Ly93d3cuZGFsYXZlcmkuYmcv"-->
+                <!--class="btn btn-social btn-facebook btn-block">-->
+                <!--<i class="fa fa-facebook"></i> Facebook-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-l-4">-->
+                <!--<a href="index7ef4.html?loginWith=google&amp;c=aHR0cHM6Ly93d3cuZGFsYXZlcmkuYmcv"-->
+                <!--class="btn btn-social btn-google btn-block">-->
+                <!--<i class="fa fa-google-plus"></i> Google+-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="sign-separator">
+                    <span>~~~</span>
+                </div>
+                <form role="form" id="loginForm" action="{{ path('security_login') }}" method="post">
+                    <input type="text" name="_username" id="login_mail" class="form-control"
+                           placeholder="Потребителско име"/>
+                    <br/>
+                    <input type="password" name="_password" id="login_password" class="form-control"
+                           placeholder="Парола"/>
+                    <br/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <label class="label_check">
+                        <input name="remember" value="1" type="checkbox"/> запомни ме от този компютър
+                    </label>
+                    <br/>
+                    <button type="submit" class="btn btn-block btn-green submit uppercase mar-t-10">Вход
+                        <!-- onclick="login('loginForm');" -->
+                    </button>
+
+                    <div class="mar-t-10 mar-b-10 text-center">
+                        <a href="javascript: void(0);" data-toggle="modal" data-target="#forgotPasswordModal"
+                           data-dismiss="modal">Забравена парола?</a>
+                    </div>
+                </form>
+                {% if error %}
+                    <div>{{ error.messageKey }}</div>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    Нямате акаунт? <a href="javascript: void(0);" data-toggle="modal" data-target="#signupModal"
+                                      data-dismiss="modal">Регистрирайте се сега!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td>Date Added</td>
+            <td>Picture</td>
+            <td>Sold By</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.dateCreated.format('Y/m/d')}}</td>
+            {% if product.image is null %}
+                <td><img src="{{ asset('public/images/default.jpg') }}" height="75" width="75"/></td>
+            {% else %}
+                <td><img src="/public/images/{{ product.image }}" height="75" width="75"/></td>
+            {% endif %}
+            <td>{{ product.user.username }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <form name="review_add" method="post" action="{{ path('review_add', {'id':product.id}) }}">
+        <div>
+            <label for="add_message" class="required">Message</label>
+            <textarea id="add_message" name="review_add[message]" required="required"></textarea>
+            {% if form.message.vars.errors | length %}
+                <div>{{ form_errors(form.message) }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="review_add_rating" class="required">Rating</label>
+            <select id="review_add_rating" name="review_add[rating]">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            {% if form.rating.vars.errors | length %}
+                <div>{{ form_errors(form.rating) }}</div>
+            {% endif %}
+        </div>
+        {{ form_row(form._token) }}
+        {% if not form.vars.valid %}
+            <div id="global_form_errors">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+        <input type="submit">
+    </form>
+{% endblock %}
+

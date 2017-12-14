@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for message in app.session.flashBag.get('success') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    {% for message in app.session.flashBag.get('warning') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    <table border="1">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td>Date Added</td>
+            <td>Picture</td>
+            <td>Sold By</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.dateCreated.format('Y/m/d') }}</td>
+            {% if product.image is null %}
+                <td><img src="{{ asset('public/images/default.jpg') }}" height="75" width="75"/></td>
+            {% else %}
+                <td><img src="/public/images/{{ product.image }}" height="75" width="75"/></td>
+            {% endif %}
+            <td>{{ product.user.username }}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    <h4>Messages:</h4>
+    {% for review in product.reviews %}
+        <div style="border: solid pink">
+            Message: {{ review.message }}
+            Rating: {{ review.rating }}
+            Author: {{ review.user.username }}
+            {% if app.user == review.user %}
+                <a href="{{ path('review_edit', {'productId': product.id, 'reviewId': review.id}) }}">Edit</a>
+                <form action="{{ path('review_delete', {'productId': product.id, 'reviewId': review.id}) }}" method="post">
+                    <button>Delete</button>
+                </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
+

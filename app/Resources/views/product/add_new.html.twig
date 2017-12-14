@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form name="product_new" method="post" action="{{ path('product_new') }}" enctype="multipart/form-data">
+        <div>
+            <label for="name" class="required">Name</label>
+            <input type="text" id="name" name="product_new[name]" required="required"/>
+        </div>
+        {% if form.name.vars.errors | length %}
+            <div>{{ form_errors(form.name) }}</div>
+        {% endif %}
+        <div>
+            <label for="description" class="required">Description</label>
+            <textarea id="description" name="product_new[description]" required="required"></textarea>
+        </div>
+        {% if form.description.vars.errors | length %}
+            <div>{{ form_errors(form.description) }}</div>
+        {% endif %}
+        <div>
+            <label for="quantity" class="required">Quantity</label>
+            <input type="text" id="quantity" name="product_new[quantity]" required="required"/>
+        </div>
+        {% if form.quantity.vars.errors | length %}
+            <div>{{ form_errors(form.quantity) }}</div>
+        {% endif %}
+        <div>
+            <label for="price" class="required">Price</label>
+            <input type="text" id="price" name="product_new[price]" required="required"/>
+        </div>
+        {% if form.price.vars.errors | length %}
+            <div>{{ form_errors(form.price) }}</div>
+        {% endif %}
+        <div>
+            <label for="image">Image</label>
+            <input type="file" id="image" name="product_new[imageFromForm]"/>
+        </div>
+        {% if form.imageFromForm.vars.errors | length %}
+            <div>{{ form_errors(form.imageFromForm) }}</div>
+        {% endif %}
+
+        {{ form_row(form._token) }}
+
+        <input type="submit">
+    </form>
+    {% if not form.vars.valid %}
+        <div id="global_form_errors">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+{% endblock %}

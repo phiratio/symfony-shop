@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+{% block head %}
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>{% block title %}N33dful - адски сделки{% endblock %}</title>
+    <meta name="description" lang="bg" content="666"/>
+    <meta name="keywords" content="666, дявоска раута, църквата одобрява, продай си душата"/>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <!-- Open Graph data -->
+    <meta property="og:locale" content="bg_BG"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="N33dful - адски сделки"/>
+    <meta property="og:description" content="Шоп с НЕпрокълнати предмети, които НЯМА да ти причинят зло.Гарантирано."/>
+    <meta property="og:url" content="index.html"/>
+    <meta property="og:site_name" content="n33dful.shop"/>
+    <meta property="og:image" content="{{ asset('public/img/logo_share.jpgг') }}"/>
+
+    <!-- SEO -->
+    <link rel="canonical" href="/"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('public/img/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('public/img/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('public/img/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('public/img/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('public/img/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('public/img/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('public/img/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('public/img/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/img/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('public/img/favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('public/img/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/img/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('public/img/favicon/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('public/img/favicon/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/style.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/bootstrapValidator.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/bootstrap-social.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/animate.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/pnotify.custom.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/plugins/sweetalert/sweetalert.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/plugins/sweetalert/themes/google/google.css') }}"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&amp;subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'/>
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block stylesheets %}{% endblock %}
+    <!-- JS -->
+    <script src="{{ asset('public/js/handlebars-v4.0.11.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/js/bootstrapvalidator.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.matchHeight.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.mycart.min.js') }}"></script>
+    <script src="{{ asset('public/js/pnotify.custom.min.js') }}"></script>
+    <script src="{{ asset('public/plugins/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('public/js/script.min.js') }}"></script>
+    <script src="{{ asset('public/js/translations.html') }}"></script>
+    <!--@todo: that del it maybe?-->
+    <script type="text/javascript">
+        var my_url = "index.html";
+        var f_url = "index.html";
+    </script>
+    {% block javascripts %}{% endblock %}
+</head>
+{% endblock %}
+<body>
+{% block header %}
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-3 col-xs-6">
+                <a href="{{ path('homepage') }}" class="logo"></a>
+            </div>
+            <div class="col-md-8 col-sm-9 col-xs-6 text-right">
+                <div class="mar-t-10">
+                    <!-- @todo: add action for search fix hrefs dobavqne1 -->
+                    <form method="get" action="" class="inline-block hidden-xs">
+                        <input class="search-control mar-r-20" name="search" placeholder="търсене ..." value=""/>
+                    </form>
+                    {% if app.user %}
+                    <a class="btn btn-green mar-r-10 hidden-xs" href="{{ path('product_new') }}">Добавяне</a>
+                    {% else %}
+                    <a class="btn btn-green mar-r-10 hidden-xs" href="{{ path('homepage') }}">Добавяне</a>
+                    {% endif %}
+                    {% block userprofileheader %}
+                        {% if app.user %}
+                            <!-- Logged in true menu logic -->
+                            <div class="btn-group pull-right">
+                                <a href="javascript: void(0);" class="user-profile dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"
+                                   style="background-image: url('{{ asset('public/img/no-avatar.png') }}');"></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li class="dropdown-header text-center"> {{ app.user.username }}</li>
+                                    <li>
+                                        <a href="{{ path('user_profile_view', {'username': app.user.username }) }}">
+                                            <i class="fa fa-fw fa-user"></i> Моят профил
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                            <i class="fa fa-fw fa-cog"></i> Админски шорткът
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('security_logout') }}">
+                                            <i class="fa fa-fw fa-sign-out"></i> Изход
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end logged in true -->
+                        {% endif %}
+                        {% if not app.user %}
+                            <!-- Logged in false menu logic -->
+                            <a class="btn btn-red" href="javascript: void(0);" data-toggle="modal"
+                               data-target="#loginModal">Вход / Регистрация</a>
+                            <!-- end logged in false-->
+                        {% endif %}
+                    {% endblock %}
+
+                    <!--shortcuts messages and bell -->
+                    <div class="pull-right mar-t-7 mar-r-30 mar-l-30 xs-mar-l-15 xs-mar-r-15">
+                        <span class="glyphicon glyphicon-shopping-cart messages-btn my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+                        <!--<a href="/" class="messages-btn">-->
+                        <!--<i class="fa fa-bell"></i>-->
+                        <!--</a>-->
+                        <!--<a href="/" class="messages-btn">-->
+                        <!--<i class="fa fa-envelope"></i>-->
+                        <!--</a>-->
+                    </div>
+                    <!-- end of shortcuts -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div id="navbar-fixed"></div>
+    <div id="navbar-menu">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="btn btn-green mar-r-10 visible-xs pull-left mar-t-8 mar-l-15"
+                   href="">Добавяне</a>
+
+                <a class="visible-xs search-btn" href="javascript:void(0);" data-toggle="modal"
+                   data-target="#searchModal" data-dismiss="modal"><i class="fa fa-search"></i></a>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Оферти</a></li>
+                    <li><a href="#">Добави оферта</a></li>
+                    <li><a href="#">Админ панел</a></li>
+                    <li><a href="https://www.coindesk.com/bitcoin-price/" target="_blank"></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</nav>
+{% endblock %}
+{% block body %}
+<div class="container mar-t-35 mar-b-50">
+
+    <div class="row">
+        <div class="col-md-8">
+            <!-- FILTERS -->
+            <div class="content-box">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-5">
+                        <button type="button" class="btn btn-grey font-size-14" data-toggle="modal"
+                                data-target="#filtersModal">
+                            <i class="fa fa-filter mar-r-3"></i> Филтри
+                        </button>
+                        <div class="modal fade" id="filtersModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Филтри</h4>
+                                    </div>
+                                    <form method="get" action="">
+                                        <input type="hidden" name="show" value="list"/>
+                                        <input type="hidden" name="sortBy" value="0"/>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+
+                                                <div class="col-md-12 mar-b-20">
+                                                    <span class="filter-title">Активност</span>
+                                                    <div>
+                                                        <label class="label_radio">
+                                                            <input type="radio" name="active" value="all" checked=""/>
+                                                            всички
+                                                        </label>
+                                                    </div>
+                                                    <div class="mar-t-5">
+                                                        <label class="label_radio">
+                                                            <input type="radio" name="active" value="y"/> само активните
+                                                        </label>
+                                                    </div>
+                                                    <div class="mar-t-5">
+                                                        <label class="label_radio">
+                                                            <input type="radio" name="active" value="n"/> само
+                                                            неактивните
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <span class="filter-title">Категория</span>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="28"/>
+                                                                Мобилни устройства, аксесоари и услуги
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="29"/>
+                                                                Банкови, застрахователни и финансови услуги
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="30"/>
+                                                                Компютри, софтуер и периферия
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="31"/>
+                                                                Електроника, ТВ, фото и Gaming
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="32"/> Битова
+                                                                електроуреди
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="33"/> Мода и
+                                                                аксесоари
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="34"/>
+                                                                Хранителни стоки и алкохол
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="35"/> Здраве
+                                                                и красота
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="36"/> Дом,
+                                                                градина и домашни любимци
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="37"/> За
+                                                                бебето и детето
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="38"/> Спорт
+                                                                и хоби
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="40"/> АВТО
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="label_check">
+                                                                <input type="checkbox" name="cats[]" value="39"/>
+                                                                Туризъм, ресторанти и свободно време
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <a class="btn btn-block btn-grey" href="index.html">Изчисти</a>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <button type="submit" class="btn btn-block btn-green">Филтрирай
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-7 text-right">
+                        <select class="form-control sortBy" name="sortBy"
+                                onchange="window.location.href=$(this).find(':selected').attr('data-url');">
+                            <option value="0" data-url="" selected="">Най-нови</option>
+                            <option value="1" data-url="index0cee.html?sortBy=1">Най-горещи</option>
+                            <option value="2" data-url="indexa5c9.html?sortBy=2">Най-коментирани</option>
+                        </select>
+                        <div class="display-icons hidden-xs">
+                            <a href="indexcb52.html?show=list" class="active">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <a href="index0f39.html?show=grid">
+                                <i class="fa fa-th"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mar-t-30">
+                <!-- CONTENT - GRID -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content-box deal-box mar-b-15 ">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-3 pad-r-10 xs-pad-l-10">
+                <span class="price">
+                    <span class="price-color"><span>6666 lv</span></span>
+                </span>
+                                    <span class="price">
+                    <span class="quality"><span>100 kinta</span></span>
+                </span>
+                                    <button class="btn btn-block btn-green-b my-cart-btn" data-id="1" data-name="KIFTETA" data-summary="vkusotiq" data-price="15" data-quantity="1" data-image="../../../web/public/img/logo.png">GIEBt</button>
+
+                                </div>
+                                <div class="col-lg-7 col-md-5 col-sm-6 pad-l-10 xs-mar-t-20">
+                                    <a href="kum stranicata na predmeta">
+                                        <h2 class="title">ime na ofertata</h2>
+                                    </a>
+                                    <a href="stranicata na predmeta#comments"
+                                       class="comments-cnt"><i class="fa fa-fw fa-comment-o"></i> mneniq tuk dali da gi
+                                        broim?</a>
+
+                                    <div class="mar-t-15">
+                                        opisanie na predmeta ot dbto
+                                    </div>
+
+                                    <div class="user-profile">
+                                        <a href="link kum toq de go prodava" class="user-avatar"
+                                           style="background-image: url('../../../web/public/img/no-avatar.png');"></a>
+                                        <a href="link kum toq de go prodava">username na prodavacha</a>
+                                        <span class="time-add">koga e publikuvana</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-3 text-center xs-mar-t-30">
+                                    <div class="deal-image-container">
+                                        <a href="link kum stranicata na predmeta"
+                                           class="deal-image"
+                                           style="background-image: url('files/images/deals/%d0%b5%d1%81%d0%b5%d0%bd_copy-103-329.jpg');"></a>
+                                    </div>
+
+                                    <a href="link kum stranicata na prdmeta"
+                                       class="btn btn-block btn-green-b">виж</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="content-box deal-box mar-b-15 ">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-3 pad-r-10 xs-pad-l-10">
+                <span class="price">
+                    <span class="price-color"><span>6666 lv</span></span>
+                </span>
+
+                                </div>
+                                <div class="col-lg-7 col-md-5 col-sm-6 pad-l-10 xs-mar-t-20">
+                                    <a href="kum stranicata na predmeta">
+                                        <h2 class="title">ime na ofertata</h2>
+                                    </a>
+                                    <a href="stranicata na predmeta#comments"
+                                       class="comments-cnt"><i class="fa fa-fw fa-comment-o"></i> mneniq tuk dali da gi
+                                        broim?</a>
+
+                                    <div class="mar-t-15">
+                                        opisanie na predmeta ot dbto
+                                    </div>
+
+                                    <div class="user-profile">
+                                        <a href="link kum toq de go prodava" class="user-avatar"
+                                           style="background-image: url('../../../web/public/img/no-avatar.png');"></a>
+                                        <a href="link kum toq de go prodava">username na prodavacha</a>
+                                        <span class="time-add">koga e publikuvana</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-3 text-center xs-mar-t-30">
+                                    <div class="deal-image-container">
+                                        <a href="link kum stranicata na predmeta"
+                                           class="deal-image"
+                                           style="background-image: url('files/images/deals/%d0%b5%d1%81%d0%b5%d0%bd_copy-103-329.jpg');"></a>
+                                    </div>
+
+                                    <a href="link kum stranicata na prdmeta"
+                                       class="btn btn-block btn-green-b">виж</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Original - visa -->
+                    <!--<div class="col-md-12">-->
+                    <!--<div class="content-box deal-box mar-b-15 unactive">-->
+                    <!--<div class="row">-->
+                    <!--<div class="col-lg-2 col-md-3 col-sm-3 pad-r-10 xs-pad-l-10">-->
+                    <!--<span class="degree">-->
+                    <!--<span class="deal-degree-71 hot"><span>7</span>&deg;</span>-->
+                    <!--</span>-->
+                    <!--<div id="btns-hot-71">-->
+                    <!--<a href="javascript: void(0);" onclick="dealRate('hot', '71');"-->
+                    <!--class="btn btn-block btn-red align-left font-size-15 "><i-->
+                    <!--class="icon icon-fire pull-left"></i> топло</a>-->
+                    <!--<a href="javascript: void(0);" onclick="dealRate('cold', '71');"-->
+                    <!--class="btn btn-block btn-blue align-left font-size-15 "><i-->
+                    <!--class="icon icon-cold pull-left"></i> студено</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-7 col-md-5 col-sm-6 pad-l-10 xs-mar-t-20">-->
+                    <!--<a href="igri/plashtai-bezkontaktno-s-visa-71.html">-->
+                    <!--<h2 class="title">Плащай безконтактно с VISA</h2>-->
+                    <!--</a>-->
+                    <!--<a href="igri/plashtai-bezkontaktno-s-visa-71.html#comments" class="comments-cnt"><i-->
+                    <!--class="fa fa-fw fa-comment-o"></i> 0 мнения</a>-->
+
+                    <!--<div class="mar-t-15">-->
+                    <!--50 седмични награди по 30 лв плюс 5 големи седмични награди, ако се пазарува-->
+                    <!--безконтактно с Виза-->
+                    <!--</div>-->
+
+                    <!--<div class="user-profile">-->
+                    <!--<a href="profile/8/index.html" class="user-avatar"-->
+                    <!--style="background-image: url('files/images/avatars/thumb2-paddington-2-characters-2016-bear-3d-bear-8-834.jpg');"></a>-->
+                    <!--<a href="profile/8/index.html">Teddy BEAR</a>-->
+                    <!--<span class="time-add">преди 4 седмици</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-3 col-md-4 col-sm-3 text-center xs-mar-t-30">-->
+                    <!--<div class="deal-image-container">-->
+                    <!--<a href="igri/plashtai-bezkontaktno-s-visa-71.html" class="deal-image"-->
+                    <!--style="background-image: url('files/images/deals/94BFF4FB-D8E9-496C-BF51-A01C56648B17-71-484.jpg');"></a>-->
+                    <!--</div>-->
+
+                    <!--<a href="igri/plashtai-bezkontaktno-s-visa-71.html"-->
+                    <!--class="btn btn-block btn-green-b">виж играта</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+                <!-- CONTENT - LIST -->
+                <!--<div class="row">-->
+                <!--<div class="col-lg-4 col-md-6 col-sm-6">-->
+                <!--<div class="content-box deal-box grid mar-b-15 ">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-12">-->
+                <!--<span class="degree">-->
+                <!--<span class="deal-degree-180 hot"><span>2</span>&deg;</span>-->
+                <!--</span>-->
+                <!--<div id="btns-hot-180">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-r-3">-->
+                <!--<a href="javascript: void(0);" onclick="dealRate('hot', '180');"-->
+                <!--class="btn btn-block btn-red align-left font-size-14 "><i-->
+                <!--class="icon icon-fire pull-left"></i> горещо</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-l-3">-->
+                <!--<a href="javascript: void(0);" onclick="dealRate('cold', '180');"-->
+                <!--class="btn btn-block btn-blue align-left font-size-14 "><i-->
+                <!--class="icon icon-cold pull-left"></i> студено</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 mar-t-15">-->
+                <!--<div class="deal-image-container">-->
+                <!--<a href=""-->
+                <!--class="deal-image"-->
+                <!--style="background-image: url('');"></a>-->
+                <!--</div>-->
+                <!--<a href="">-->
+                <!--<h2 class="title">Избери си награда от Ardes.bg!</h2>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 text-center">-->
+                <!--<a href=""-->
+                <!--class="btn btn-green-b">виж играта</a>-->
+                <!--<a href=""-->
+                <!--class="comments-cnt"><i class="fa fa-fw fa-comment-o"></i> 0 мнения</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-4 col-md-6 col-sm-6">-->
+                <!--<div class="content-box deal-box grid mar-b-15 ">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-12">-->
+                <!--<span class="degree">-->
+                <!--<span class="deal-degree-179 hot"><span>1</span>&deg;</span>-->
+                <!--</span>-->
+                <!--<div id="btns-hot-179">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-r-3">-->
+                <!--<a href="javascript: void(0);" onclick="dealRate('hot', '179');"-->
+                <!--class="btn btn-block btn-red align-left font-size-14 "><i-->
+                <!--class="icon icon-fire pull-left"></i> горещо</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-l-3">-->
+                <!--<a href="javascript: void(0);" onclick="dealRate('cold', '179');"-->
+                <!--class="btn btn-block btn-blue align-left font-size-14 "><i-->
+                <!--class="icon icon-cold pull-left"></i> студено</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 mar-t-15">-->
+                <!--<div class="deal-image-container">-->
+                <!--<a href=""-->
+                <!--class="deal-image"-->
+                <!--style="background-image: url('');"></a>-->
+                <!--</div>-->
+                <!--<a href="">-->
+                <!--<h2 class="title">Лютеница Първомай <span class="sep">|</span> <span-->
+                <!--class="price">1.24 лв.</span></h2>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 text-center">-->
+                <!--<a href=""-->
+                <!--class="btn btn-green-b">виж далаверата</a>-->
+                <!--<a href=""-->
+                <!--class="comments-cnt"><i class="fa fa-fw fa-comment-o"></i> 0 мнения</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-4 col-md-6 col-sm-6">-->
+                <!--<div class="content-box deal-box grid mar-b-15 unactive">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-12">-->
+                <!--<span class="degree">-->
+                <!--<span class="deal-degree-178 hot"><span>1</span>&deg;</span>-->
+                <!--</span>-->
+                <!--<div id="btns-hot-178">-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-r-3">-->
+                <!--<a href="javascript: void(0);" onclick="dealRate('hot', '178');"-->
+                <!--class="btn btn-block btn-red align-left font-size-14 "><i-->
+                <!--class="icon icon-fire pull-left"></i> горещо</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-sm-6 col-xs-6 pad-l-3">-->
+                <!--<a href="javascript: void(0);" onclick="dealRate('cold', '178');"-->
+                <!--class="btn btn-block btn-blue align-left font-size-14 "><i-->
+                <!--class="icon icon-cold pull-left"></i> студено</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 mar-t-15">-->
+                <!--<div class="deal-image-container">-->
+                <!--<a href=""-->
+                <!--class="deal-image"-->
+                <!--style="background-image: url('');"></a>-->
+                <!--</div>-->
+                <!--<a href="">-->
+                <!--<h2 class="title">Честит рожден ден Emag!</h2>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-md-12 text-center">-->
+                <!--<a href=""-->
+                <!--class="btn btn-green-b">виж ваучера</a>-->
+                <!--<a href=""-->
+                <!--class="comments-cnt"><i class="fa fa-fw fa-comment-o"></i> 0 мнения</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="expired"-->
+                <!--data-href=""></div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--</div>-->
+                <!-- PAGINATION -->
+                <div class="text-center">
+                    <ul class='pagination pagination-sm'>
+                        <li class='disabled'><a href='javascript: void(0);'><i class='fa fa-long-arrow-left'></i></a>
+                        </li>
+                        <li class='active'><a href='javascript: void(0);'>1</a></li>
+                        <li><a href='2.html'>2</a></li>
+                        <li><a href='2.html'><i class='fa fa-long-arrow-right'></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 sm-mar-t-20"></div>
+    </div>
+
+</div>
+{% endblock %}
+{% block subscribe %}
+<!-- SUBSCRIBE -->
+<div class="subscribe-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-2"></div>
+            <div class="col-md-6 col-sm-8 text-center">
+                <span class="subscribe-text">
+                    <i class="fa fa-envelope-o"></i> Запишете се за нашия седмичен бюлетин и получавайте най-горещите оферти
+                </span>
+                <br/>
+
+                <form role="form" id="subscribeForm">
+                    <div class="input-group">
+                        <input type="text" name="mail" id="mail" placeholder="електронна поща ..." value=""
+                               class="form-control"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-red submit" onclick="subscribe('#subscribeForm');">Абониране</button>
+                        </span>
+                    </div>
+                </form>
+                <br/>
+                <span class="font-size-13">Няма да предоставим електронната Ви поща на трети лица</span>
+            </div>
+            <div class="col-md-3 col-sm-2"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<!-- FOOTER -->
+<footer>
+    <!-- @todo: fix links -->
+    <div class="container text-center">
+        <a href="za-nas.html">За нас</a>
+        <a href="uslovia-za-polzvane.html">Условия за ползване</a>
+        <a href="poveritelnost.html">Поверителност</a>
+        <a href="pomosht/index.html">Помощ</a>
+        <a href="kontakti.html">Контакти</a>
+
+        <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank" class="social facebook">
+                <i class="fa fa-facebook"></i>
+            </a>
+            <a href="https://plus.google.com/" target="_blank" class="social google-plus">
+                <i class="fa fa-google-plus"></i>
+            </a>
+            <a href="https://twitter.com/" target="_blank" class="social twitter">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a href="https://twitter.com/" target="_blank" class="social github">
+                <i class="fa fa-github"></i>
+            </a>
+        </div>
+        &#169; n33dful 2017. Някои права запазени.
+    </div>
+
+    <!-- back to top button -->
+    <a id="back-to-top" href="#" class="btn btn-danger btn-lg back-to-top" role="button" title="Нагоре"
+       data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+</footer>
+{% endblock %}
+{% block loginmodal %}
+    {% if not app.user and app.request.attributes.get('_route') != 'security_register' and app.request.attributes.get('_route') != 'security_login' %}
+    {{ render(controller(
+    'AppBundle:Security:displayRegisterForm'
+    )) }}
+    {% endif %}
+{% endblock %}
+{% block signupmodal %}
+    {% if not app.user and app.request.attributes.get('_route') != 'security_register' and app.request.attributes.get('_route') != 'security_login' %}
+    {{ render(controller(
+    'AppBundle:Security:displayLoginForm'
+    )) }}
+    {% endif %}
+{% endblock %}
+{% block forgotpasswordmodal %}
+<!-- FORGOT PASSWORD MODAL -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog width-400px width-auto" role="document">
+        <div class="modal-content">
+            <form role="form" id="forgotPassword">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Забравена парола</h4>
+                </div>
+                <div class="modal-body">
+                    Въведете електронната поща, с която сте се регистрирали.
+                    <input type="text" name="mail" id="forgotpassword_mail" class="form-control mar-t-5"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-green submit" onclick="forgotPassword('forgotPassword');">
+                        Изпрати нова парола
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block searchmodal %}
+<!-- SEARCH MODAL -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog width-400px width-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Търсене</h4>
+            </div>
+            <form method="get" action="">
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        Думата или израза който търсите трябва да бъде поне 3 символа.
+                    </div>
+                    <input class="form-control" name="search" placeholder="търсене ..." value=""/>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-green">Търси</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block cookies %}
+<!-- COOKIES -->
+<script type="text/javascript">
+    window.cookieconsent_options = {
+        "message": "Нашият уебсайт използва „бисквитки“, които гарантират възможно най-оптималната му работа.",
+        "dismiss": "Айляк!",
+        "learnMore": "Подробности",
+        "link": "./poveritelnost.html",
+        "theme": "light-floating"
+    };
+</script>
+<script type="text/javascript" src="{{ asset('public/js/cookieconsent.min.js') }}"></script>
+{% endblock %}
+</body>
+</html>
