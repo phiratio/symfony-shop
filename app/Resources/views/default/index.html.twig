@@ -1,5 +1,107 @@
 {% extends 'base.html.twig' %}
-
+{% block body %}
+    {% for message in app.session.flashBag.get('success') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    {% for message in app.session.flashBag.get('warning') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    <div class="container mar-t-35 mar-b-50">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="mar-t-30">
+                    <!-- CONTENT - GRID -->
+                    {% for product in products %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="content-box deal-box mar-b-15 ">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-3 pad-r-10 xs-pad-l-10">
+                                            <span class="price">
+                                                         <span class="price-color"><span>{{ product.price }} лв.</span></span>
+                                            </span>
+                                            <span class="price">
+                                             <span class="quality"><span>{{ product.quantity }} бр.</span>
+                                             </span>
+                                            </span>
+                                            {% if app.user is same as(product.user) %}
+                                                <a href="{{ path('product_edit', { 'id': product.id }) }}"
+                                                   target="_self">
+                                                    <button class="btn btn-block btn-blue my-cart-btn">Редактирай
+                                                    </button>
+                                                </a>
+                                                <a href="{{ path('product_delete', { 'id': product.id }) }}"
+                                                   target="_self">
+                                                    <button class="btn btn-block btn-red my-cart-btn">Изтрии
+                                                    </button>
+                                                </a>
+                                            {% endif %}
+                                            {% if app.user %}
+                                                {% if app.user != product.user %}
+                                                    <button class="btn btn-block btn-green-b my-cart-btn" data-id="1"
+                                                            data-name="KIFTETA" data-summary="vkusotiq" data-price="15"
+                                                            data-quantity="1" data-image="./resources/img/logo.png">Купи
+                                                    </button>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-lg-7 col-md-5 col-sm-6 pad-l-10 xs-mar-t-20">
+                                            {% if app.user %}
+                                                <a href="{{ path('product_view_one', { 'id': product.id }) }}">
+                                                    <h2 class="title">{{ product.name }}</h2>
+                                                </a>
+                                            {% else %}
+                                                <a href="{{ path('security_login') }}">
+                                                    <h2 class="title">{{ product.name }}</h2>
+                                                </a>
+                                            {% endif %}
+                                            <a href="stranicata na predmeta#comments" class="comments-cnt"><i
+                                                        class="fa fa-fw fa-comment-o"></i> mneniq tuk
+                                                dali da
+                                                gi
+                                                broim?
+                                            </a>
+                                            <div class="mar-t-15">
+                                                {{ product.description }}
+                                            </div>
+                                            <div class="user-profile">
+                                                <a href="link kum toq de go prodava" class="user-avatar"
+                                                   style="background-image: url('{{ asset('public/img/no-avatar.png') }}');"></a>
+                                                <a href="link kum toq de go prodava">{{ product.user.username }}</a>
+                                                <span class="time-add"> публикувана {{ product.dateCreated.format('Y/m/d') }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-3 text-center xs-mar-t-30">
+                                            <div class="deal-image-container">
+                                                {% if app.user %}
+                                                    <a href="{{ path('product_view_one', { 'id': product.id }) }}"
+                                                       class="deal-image"
+                                                       style="background-image: url('/public/img/uploaded/{{ product.image }}');"></a>
+                                                {% else %}
+                                                    <a href="{{ path('security_login') }}" class="deal-image"
+                                                       style="background-image: url('/public/img/uploaded/{{ product.image }}');"></a>
+                                                {% endif %}
+                                            </div>
+                                            {% if app.user %}
+                                                <a href="{{ path('product_view_one', { 'id': product.id }) }}"
+                                                   class="btn btn-block btn-green-b">виж</a>
+                                            {% else %}
+                                                <a href="{{ path('security_login') }}"
+                                                   class="btn btn-block btn-green-b">влез за да видиш</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <!-- CONTENT - GRID END -->
+                </div>
+            </div>
+            <div class="col-md-4 sm-mar-t-20"></div>
+        </div>
+    </div>
+{% endblock %}
 {#{% block body %}#}
     {#{% for message in app.session.flashBag.get('success') %}#}
         {#<p>{{ message }}</p>#}
@@ -29,16 +131,15 @@
                 {#<td>{{ product.price }}</td>#}
                 {#<td>{{ product.dateCreated.format('Y/m/d') }}</td>#}
                 {#{% if product.image is null %}#}
-                    {#<td><img src="{{ asset('public/imag/no-image.jpg') }}" height="75" width="75"/></td>#}
+                    {#<td><img src="{{ asset('public/img/no-image.jpg') }}" height="75" width="75"/></td>#}
                 {#{% else %}#}
-                    {#<td><img src="/public/img/uploaded{{ product.image }}" height="75" width="75"/></td>#}
+                    {#<td><img src="/public/img/uploaded/{{ product.image }}" height="75" width="75"/></td>#}
                 {#{% endif %}#}
                 {#<td>{{ product.user.username }}</td>#}
                 {#<td>#}
                     {#{% if app.user %}#}
                         {#{% if app.user != product.user %}#}
-                            {#<a href="{{ path('product_view_one', { 'id': product.id }) }}">Buy</a>#}
-                            {#<a href="{{ path('review_add', { 'id': product.id }) }}">Leave a Message</a>#}
+                            {#<a href="{{ path('product_view_one', { 'id': product.id }) }}">виж</a>#}
                         {#{% endif %}#}
                     {#{% else %}#}
                         {#<a href="{{ path('security_login') }}">Login To View</a>#}

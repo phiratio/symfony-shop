@@ -1,92 +1,95 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="container">
-        <div class="jumbotron">
-            <form role="form" class="well form-horizontal" action="{{ path('user_profile_edit', {'username': app.user.username }) }}" method="post"
-                  id="signupForm">
-                <fieldset>
-                    <!-- Form Name -->
-                    <legend class="mar-b-0">
-                        <span class="text-center">Промени данните:</span>
-                    </legend>
-                    <br>
-                    <!-- First Name -->
-                    <div class="form-group">
-                        <label class="control-label">Име</label>
-                        <div class="inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="user_edit[firstName]" placeholder="Име" class="form-control"
-                                       type="text" required value="{{ user.firstName }}">
-                                {% if form.firstName.vars.errors | length %}
-                                    <div>{{ form_errors(form.firstName) }}</div>
-                                {% endif %}
+        <div class="jumbotron row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-10">
+                <form role="form" class="well form-horizontal" action="{{ path('user_profile_edit', {'username': app.user.username }) }}" method="post"
+                                               id="signupForm">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <legend class="mar-b-0">
+                            <span class="text-center">Промени данните:</span>
+                        </legend>
+                        <br>
+                        <!-- First Name -->
+                        <div class="form-group text-center">
+                            <label class="control-label">Име</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="user_edit[firstName]" placeholder="Име" class="form-control"
+                                           type="text" required value="{{ user.firstName }}">
+                                    {% if form.firstName.vars.errors | length %}
+                                        <div>{{ form_errors(form.firstName) }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Last Name -->
-                    <div class="form-group">
-                        <label class="control-label">Фамилия</label>
-                        <div class="inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="user_edit[lastName]" placeholder="Фамилия" class="form-control"
-                                       type="text" required value="{{ user.lastName }}">
-                                {% if form.lastName.vars.errors | length %}
-                                    <div>{{ form_errors(form.lastName) }}</div>
-                                {% endif %}
+                        <!-- Last Name -->
+                        <div class="form-group text-center">
+                            <label class="control-label">Фамилия</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input name="user_edit[lastName]" placeholder="Фамилия" class="form-control"
+                                           type="text" required value="{{ user.lastName }}">
+                                    {% if form.lastName.vars.errors | length %}
+                                        <div>{{ form_errors(form.lastName) }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Country -->
-                    <div class="form-group">
-                        <label for="selectCountry" class="control-label">Страна</label>
-                        <div class="selectContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-                                <select id="selectCountry" name="user_edit[country]"
-                                        class="form-control selectpicker" required>
-                                    {% for key, value in form.country.vars.choices %}
-                                        {% if value.value == user.country %}
-                                            <option value="{{ value.value }}" selected="selected">{{ value.label }}</option>
-                                        {% else %}
-                                            <option value="{{ value.value }}">{{ value.label }}</option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
+                        <!-- Country -->
+                        <div class="form-group text-center">
+                            <label for="selectCountry" class="control-label">Страна</label>
+                            <div class="selectContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
+                                    <select id="selectCountry" name="user_edit[country]"
+                                            class="form-control selectpicker" required>
+                                        {% for key, value in form.country.vars.choices %}
+                                            {% if value.value == user.country %}
+                                                <option value="{{ value.value }}" selected="selected">{{ value.label }}</option>
+                                            {% else %}
+                                                <option value="{{ value.value }}">{{ value.label }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Shipping -->
-                    <div class="form-group">
-                        <label class="control-label">Адрес за доставка</label>
-                        <div class="inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <input name="user_edit[shippingAddress]" placeholder="Адрес за доставка"
-                                       class="form-control" type="text" required value="{{ user.shippingAddress }}">
-                                {% if form.shippingAddress.vars.errors | length %}
-                                    <div>{{ form_errors(form.shippingAddress) }}</div>
-                                {% endif %}
+                        <!-- Shipping -->
+                        <div class="form-group text-center">
+                            <label class="control-label">Адрес за доставка</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <input name="user_edit[shippingAddress]" placeholder="Адрес за доставка"
+                                           class="form-control" type="text" required value="{{ user.shippingAddress }}">
+                                    {% if form.shippingAddress.vars.errors | length %}
+                                        <div>{{ form_errors(form.shippingAddress) }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <button type="submit" class="btn btn-block btn-green submit">Промени
-                    </button>
-                    {{ form_row(form._token) }}
+                        <br/>
+                        <button type="submit" class="btn btn-block btn-green submit">Промени
+                        </button>
+                        {{ form_row(form._token) }}
 
-                    {% if not form.vars.valid %}
-                        <div id="global_form_errors">
-                            {{ form_errors(form) }}
-                        </div>
-                    {% endif %}
-                    {% for message in app.session.flashbag.get('warning') %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </fieldset>
-            </form>
-
+                        {% if not form.vars.valid %}
+                            <div id="global_form_errors">
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
+                        {% for message in app.session.flashbag.get('warning') %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
         </div>
     </div>
 {% endblock %}
