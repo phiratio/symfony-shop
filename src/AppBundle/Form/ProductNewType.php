@@ -22,7 +22,8 @@ class ProductNewType extends AbstractType
             ->add('imageFromForm', FileType::class, array(
                 'data_class' => null,
                 'required' => false
-            ));
+            ))
+        ->add('category');
     }
 
     public function configureOptions(OptionsResolver $resolver)

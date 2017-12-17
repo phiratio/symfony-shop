@@ -1,0 +1,13 @@
+{% for message in app.session.flashBag.get('warning') %}
+    <p>{{ message }}</p>
+{% endfor %}
+<form action="{{ path('category_new') }}" method="post">
+    Name: <input type="text" id="category_name" name="category[name]" required="required" />
+    {{ form_row(form._token) }}
+    <input type="submit">
+    {% if not form.vars.valid %}
+        <div id="global_form_errors">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+</form>

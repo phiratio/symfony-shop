@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByCategory($category)
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        $result = $queryBuilder->select('p')
+            ->join('p.category', 'c')
+            ->where($queryBuilder->expr()->eq('c.name', ':category'))
+            ->setParameters(array(
+                'category' => $category
+        ));
+
+        $query = $result->getQuery()->getResult();
+        return $query;
+    }
 }

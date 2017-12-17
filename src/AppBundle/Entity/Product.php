@@ -125,10 +125,18 @@ class Product
      */
     private $reviews;
 
+    /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="products")
+     */
+    private $category;
+
     public function __construct()
     {
         $this->setDateCreated(new \DateTime('now'));
         $this->setReviews(new ArrayCollection());
+        $this->category = new ArrayCollection();
     }
 
     /**
@@ -336,6 +344,24 @@ class Product
     public function addReview($review)
     {
         $this->reviews->add($review);
+        return $this;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $category
+     * @return Product
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
         return $this;
     }
 }
