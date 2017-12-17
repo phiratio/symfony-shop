@@ -3,6 +3,9 @@
 {% endfor %}
 <form action="{{ path('category_new') }}" method="post">
     Name: <input type="text" id="category_name" name="category[name]" required="required" />
+    {% if form.name.vars.errors | length %}
+        <div>{{ form_errors(form.name) }}</div>
+    {% endif %}
     {{ form_row(form._token) }}
     <input type="submit">
     {% if not form.vars.valid %}
