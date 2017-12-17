@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <form name="product_new" method="post" action="{{ path('product_edit', {'id': product.id}) }}" enctype="multipart/form-data">
+    <form name="product_new" method="post" action="{{ path('product_edit', {'id': product.id}) }}"
+          enctype="multipart/form-data">
         <div>
             <label for="name" class="required">Name</label>
             <input type="text" id="name" name="product_new[name]" required="required" value="{{ product.name }}"/>
@@ -11,14 +12,16 @@
         {% endif %}
         <div>
             <label for="description" class="required">Description</label>
-            <textarea id="description" name="product_new[description]" required="required">{{ product.description }}</textarea>
+            <textarea id="description" name="product_new[description]"
+                      required="required">{{ product.description }}</textarea>
         </div>
         {% if form.description.vars.errors | length %}
             <div>{{ form_errors(form.description) }}</div>
         {% endif %}
         <div>
             <label for="quantity" class="required">Quantity</label>
-            <input type="text" id="quantity" name="product_new[quantity]" required="required" value="{{ product.quantity }}"/>
+            <input type="text" id="quantity" name="product_new[quantity]" required="required"
+                   value="{{ product.quantity }}"/>
         </div>
         {% if form.quantity.vars.errors | length %}
             <div>{{ form_errors(form.quantity) }}</div>
@@ -42,6 +45,16 @@
         {% if form.imageFromForm.vars.errors | length %}
             <div>{{ form_errors(form.imageFromForm) }}</div>
         {% endif %}
+
+        <select id="product_new_category" name="product_new[category]">
+            {% for category in categories %}
+                {% if product.category.id == category.id %}
+                    <option value="{{ category.id }}" selected="selected">{{ category.name }}</option>
+                {% else %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
 
         {{ form_row(form._token) }}
 

@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class ReviewRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getReviewCount($productId)
+    {
+        $queryBuilder = $this->createQueryBuilder('r');
+
+        $query = $queryBuilder->select($queryBuilder->expr()->count('r'));
+
+        return $query->getQuery()->getResult();
+    }
 }

@@ -56,10 +56,7 @@
                                                 </a>
                                             {% endif %}
                                             <a href="{{ path('product_view_one', {'id' : product.id}) }}#comments" class="comments-cnt"><i
-                                                        class="fa fa-fw fa-comment-o"></i> mneniq tuk
-                                                dali da
-                                                gi
-                                                broim?
+                                                        class="fa fa-fw fa-comment-o"></i>{{ product.reviewCount }}
                                             </a>
                                             <div class="mar-t-15">
                                                 {{ product.description }}
@@ -68,7 +65,7 @@
                                                 <a href="{{ path('user_profile_view', {'username' : product.user.username}) }}" class="user-avatar"
                                                    style="background-image: url('{{ asset('public/img/no-avatar.png') }}');"></a>
                                                 <a href="{{ path('user_profile_view', {'username' : product.user.username}) }}">{{ product.user.username }}</a>
-                                                <span class="time-add"> публикувана {{ product.dateCreated.format('Y/m/d') }}</span>
+                                                <span class="time-add"> публикувана {{ product.dateCreated.format('Y/m/d')}}, преди {{ product.timeSpanFromPublishing }}</span>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-4 col-sm-3 text-center xs-mar-t-30">
