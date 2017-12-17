@@ -77,7 +77,7 @@ class Product
      *     message="Not a valid number"
      * )
      * @Assert\Regex(
-     *     "/^\b(\d+)(\.(\d){0,2})\b$/",
+     *     "/^\b(\d+)(\.(\d){0,2})?\b$/",
      *     message="Up to two digits after the decimal separator"
      * )
      * @Assert\GreaterThan(
