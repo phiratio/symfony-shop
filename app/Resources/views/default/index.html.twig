@@ -55,7 +55,7 @@
                                                     <h2 class="title">{{ product.name }}</h2>
                                                 </a>
                                             {% endif %}
-                                            <a href="stranicata na predmeta#comments" class="comments-cnt"><i
+                                            <a href="{{ path('product_view_one', {'id' : product.id}) }}#comments" class="comments-cnt"><i
                                                         class="fa fa-fw fa-comment-o"></i> mneniq tuk
                                                 dali da
                                                 gi
@@ -65,9 +65,9 @@
                                                 {{ product.description }}
                                             </div>
                                             <div class="user-profile">
-                                                <a href="link kum toq de go prodava" class="user-avatar"
+                                                <a href="{{ path('user_profile_view', {'username' : product.user.username}) }}" class="user-avatar"
                                                    style="background-image: url('{{ asset('public/img/no-avatar.png') }}');"></a>
-                                                <a href="link kum toq de go prodava">{{ product.user.username }}</a>
+                                                <a href="{{ path('user_profile_view', {'username' : product.user.username}) }}">{{ product.user.username }}</a>
                                                 <span class="time-add"> публикувана {{ product.dateCreated.format('Y/m/d') }}</span>
                                             </div>
                                         </div>

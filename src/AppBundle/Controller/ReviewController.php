@@ -39,7 +39,9 @@ class ReviewController extends Controller
 
         if ($this->getUser() === $product->getUser()) {
             $this->addFlash('warning', 'You can\'t leave reviews for your own products');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('product_view_one', array(
+                'id' => $id
+            ));
         }
 
         $review = new Review();

@@ -27,9 +27,9 @@
             <td>{{ product.price }}</td>
             <td>{{ product.dateCreated.format('Y/m/d') }}</td>
             {% if product.image is null %}
-                <td><img src="{{ asset('public/images/default.jpg') }}" height="75" width="75"/></td>
+                <td><img src="{{ asset('public/img/no-image.jpg') }}" height="75" width="75"/></td>
             {% else %}
-                <td><img src="/public/images/{{ product.image }}" height="75" width="75"/></td>
+                <td><img src="/public/img/uploaded/{{ product.image }}" height="75" width="75"/></td>
             {% endif %}
             <td>{{ product.user.username }}</td>
 
@@ -50,5 +50,6 @@
             {% endif %}
         </div>
     {% endfor %}
+    <p><a href="{{ path('review_add', {'id': product.id}) }}">Add a Message</a></p>
 {% endblock %}
 

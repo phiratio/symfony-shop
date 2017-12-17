@@ -1,0 +1,9 @@
+{% for message in app.session.flashBag.get('success') %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% for message in app.session.flashBag.get('warning') %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% for category in categories %}
+    <a href="{{ path('category_view_by_one', {'name' : category.name}) }}"> {{ category.name }}</a> <br/>
+{% endfor %}

@@ -32,9 +32,9 @@
         {% endif %}
         <div>
             {% if product.image is null %}
-                <td><img src="{{ asset('public/images/default.jpg') }}" height="75" width="75"/></td>
+                <td><img src="{{ asset('public/img/no-image.jpg') }}" height="75" width="75"/></td>
             {% else %}
-                <td><img src="/public/images/{{ product.image }}" height="75" width="75"/></td>
+                <td><img src="/public/img/uploaded/{{ product.image }}" height="75" width="75"/></td>
             {% endif %}
             <label for="image">Image</label>
             <input type="file" id="image" name="product_new[imageFromForm]"/>
