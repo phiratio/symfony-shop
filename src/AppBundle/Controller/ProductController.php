@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
 use AppBundle\Form\ProductNewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -71,8 +72,13 @@ class ProductController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+
         return $this->render(
             'product/add_new.html.twig', array(
+                'categories' => $categories,
             'form' => $form->createView()
         ));
     }
@@ -154,9 +160,14 @@ class ProductController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+
         return $this->render(
             'product/edit.html.twig', array(
             'product' => $product,
+            'categories' => $categories,
             'form' => $form->createView()
         ));
     }

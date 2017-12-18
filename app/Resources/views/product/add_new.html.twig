@@ -40,6 +40,13 @@
                         <div>{{ form_errors(form.imageFromForm) }}</div>
                     {% endif %}
 
+                    Категория:
+                    <select id="product_add_category" name="product_new[category]">
+                        {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+
                     {{ form_row(form._token) }}
                     <div class="mar-t-30 text-center">
                         <button type="submit" class="btn btn-green submit uppercase" name="dealAdd" value="add">

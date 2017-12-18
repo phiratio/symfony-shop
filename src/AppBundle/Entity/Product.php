@@ -126,6 +126,11 @@ class Product
     private $reviews;
 
     /**
+     * @var integer
+     */
+    private $reviewCount;
+
+    /**
      * @var Category
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="products")
@@ -363,6 +368,33 @@ class Product
     {
         $this->category = $category;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReviewCount(): int
+    {
+        return $this->getReviews()->count();
+    }
+
+    public function getTimeSpanFromPublishing()
+    {
+        $dateDiff = $this->getDateCreated()->diff(new \DateTime('now'));
+
+        if (0 !== $dateDiff->days) {
+            return $dateDiff->days . ' дена';
+        }
+
+        if ($dateDiff->h !== 0) {
+            return $dateDiff->h . ' часа';
+        };
+
+        if ($dateDiff->i !== 0) {
+            return $dateDiff->i . ' минути';
+        }
+
+        return $dateDiff->s . ' секунди';
     }
 }
 
